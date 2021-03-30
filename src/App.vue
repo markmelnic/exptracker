@@ -1,26 +1,45 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <People v-bind:people="people"/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import People from './components/People'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    People
+  },
+  
+  data() {
+    return {
+      people: [
+        {
+          id: 1,
+          name: "Mark",
+          share: 50
+        },
+        {
+          id: 2,
+          name: "Traian",
+          share: 50
+        }
+      ]
+    }
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Montserrat;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+
+#app::-webkit-scrollbar {
+  display: none;
 }
 </style>
