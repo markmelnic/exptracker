@@ -20,9 +20,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 table {
     border: solid 1px black;
+    td {
+        counter-reset: 2;
+    }
 }
 tr, th, td {
     border: solid 1px black;

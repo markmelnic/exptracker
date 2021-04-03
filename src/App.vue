@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 import People from './components/People'
 
 export default {
@@ -12,7 +14,6 @@ export default {
   components: {
     People
   },
-  
   data() {
     return {
       people: [
@@ -26,10 +27,28 @@ export default {
           name: "Traian",
           share: 50
         }
-      ]
+      ],
+      msg: '',
     }
-  }
-}
+  },
+    methods: {
+    getMessage() {
+      const path = 'http://localhost:5000/';
+      axios.get(path)
+        .then((res) => {
+          this.msg = res.data;
+          console.log(this.msg);
+        })
+        .catch((error) => {
+          // eslint-disable-next-line
+          console.error(error);
+        });
+    },
+  },
+  created() {
+    this.getMessage();
+  },
+};
 </script>
 
 <style>
