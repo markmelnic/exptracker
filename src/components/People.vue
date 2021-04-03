@@ -14,8 +14,7 @@
 </template>
 
 <script>
-import axios from 'axios';
-axios.defaults.baseURL = process.env.VUE_APP_API_URL
+import areq from '@/areq.js';
 
 export default {
     name: "People",
@@ -24,18 +23,9 @@ export default {
             people: null
         }
     },
-    methods: {
-        getPeople: function(path) {
-        return axios.get(axios.defaults.baseURL + path)
-        .then(response => response.data)
-        .then(people => this.people = people)
-        .catch(error => console.log(error))
-        },
-    },
     created: async function() {
-        await this.getPeople('people')
+        this.people = await areq('people')
     }
-
 }
 </script>
 
