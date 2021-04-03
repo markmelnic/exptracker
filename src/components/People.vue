@@ -14,9 +14,28 @@
 </template>
 
 <script>
+import axios from 'axios';
+axios.defaults.baseURL = process.env.VUE_APP_API_URL
+
 export default {
     name: "People",
-    props: ["people"]
+    data() {
+        return {
+            people: null
+        }
+    },
+    methods: {
+        getPeople: function(path) {
+        return axios.get(axios.defaults.baseURL + path)
+        .then(response => response.data)
+        .then(people => this.people = people)
+        .catch(error => console.log(error))
+        },
+    },
+    created: async function() {
+        await this.getPeople('people')
+    }
+
 }
 </script>
 
