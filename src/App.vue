@@ -1,12 +1,11 @@
 <template>
   <div id="app">
+    <h1>Extracker</h1>
     <People v-bind:people="people"/>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-
 import People from './components/People'
 
 export default {
@@ -14,39 +13,7 @@ export default {
   components: {
     People
   },
-  data() {
-    return {
-      people: [
-        {
-          id: 1,
-          name: "Mark",
-          share: 50
-        },
-        {
-          id: 2,
-          name: "Traian",
-          share: 50
-        }
-      ],
-      msg: '',
-    }
-  },
-    methods: {
-    getMessage() {
-      const path = 'http://localhost:5000/';
-      axios.get(path)
-        .then((res) => {
-          this.msg = res.data;
-          console.log(this.msg);
-        })
-        .catch((error) => {
-          // eslint-disable-next-line
-          console.error(error);
-        });
-    },
-  },
-  created() {
-    this.getMessage();
+  methods: {
   },
 };
 </script>
@@ -56,9 +23,18 @@ export default {
   font-family: Montserrat;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  width: fit-content;
+  margin: 0 auto 0 auto;
+
+  font-size: 18px;
 }
 
 #app::-webkit-scrollbar {
   display: none;
+}
+
+h1 {
+  color: #214FF1;
 }
 </style>
