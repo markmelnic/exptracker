@@ -11,6 +11,11 @@
         <td>{{person.share}}%</td>
     </tr>
     </table>
+
+    <input v-model="name" placeholder="Name" required />
+    <input v-model="share" placeholder="Share %" required />
+    <button @click.prevent="addUser()">Submit Post</button>
+
 </template>
 
 <script>
@@ -24,8 +29,8 @@ export default {
         }
     },
     methods: {
-        addUser() {
-            preq('add_user')
+        async addUser() {
+            this.people = await preq('add_user', {name: this.name, share: this.share})
         }
     },
     created: async function() {
@@ -36,6 +41,7 @@ export default {
 
 <style scoped lang="scss">
 table {
+    width: 20em;
     border: solid 1px black;
     td {
         counter-reset: 2;

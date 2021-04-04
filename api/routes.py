@@ -1,6 +1,9 @@
-from flask import jsonify
+from flask import jsonify, request
 
 from . import app
+from api import db
+from api.models import *
+from api.utils import *
 
 @app.route("/")
 def main():
@@ -8,16 +11,15 @@ def main():
 
 @app.route("/people")
 def people():
-    people = [
-        {
-        "id": 1,
-        "name": "Mark",
-        "share": 50
-        },
-        {
-        "id": 2,
-        "name": "Traian",
-        "share": 50
-        }
-    ]
-    return jsonify(people)
+    return jsonify(get_people())
+
+@app.route("/add_user", methods=['POST'])
+def add_user():
+    person = request.get_json()
+    entry = People(
+        name = person['name'],
+        share = person['share']
+    )
+    db.session.add(entry)
+    db.session.commit()
+    return jsonify(get_people())
