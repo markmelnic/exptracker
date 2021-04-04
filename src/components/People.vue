@@ -6,15 +6,21 @@
         <th>
             Share
         </th>
+        <th>
+            DELETE
+        </th>
     <tr v-bind:key="person.id" v-for="person in people">
         <td>{{person.name}}</td>
         <td>{{person.share}}%</td>
+        <td>
+            <button v-on:click="delUser(person.id)">REMOVE</button>
+        </td>
     </tr>
     </table>
 
     <input v-model="name" placeholder="Name" required />
     <input v-model="share" placeholder="Share %" required />
-    <button @click.prevent="addUser()">Submit Post</button>
+    <button @click.prevent="addUser(id)">ADD</button>
 
 </template>
 
@@ -25,17 +31,21 @@ export default {
     name: "People",
     data() {
         return {
-            people: null
+            people: null,
+            id: null,
+            name: null,
+            share: null
         }
     },
     methods: {
         async addUser() {
             this.people = await preq('people', {name: this.name, share: this.share})
+            this.name = ""
+            this.share = ""
         },
-        async delUser() {
-            this.people = await dreq('people', {id: this.id})
+        async delUser(id) {
+            this.people = await dreq('people', {'id': id})
         }
-
     },
     created: async function() {
         this.people = await greq('people')

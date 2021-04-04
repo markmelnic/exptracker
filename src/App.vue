@@ -4,7 +4,7 @@
       <img alt="Extracker Logo" src="./assets/logo.png">
       <h1>Extracker</h1>
     </header>
-    <People v-bind:people="people"/>
+    <People/>
   </div>
 </template>
 

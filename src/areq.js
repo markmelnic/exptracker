@@ -7,14 +7,14 @@ async function greq(path) {
     .catch(error => console.log(error));
 }
 
-async function preq(path, data) {
-    return await axios.post(axios.defaults.baseURL + path, data)
+async function preq(path, payload) {
+    return await axios.post(axios.defaults.baseURL + path, payload)
     .then(response => response.data)
     .catch(error => console.log(error));
 }
 
-async function dreq(path, data) {
-    return await axios.delete(axios.defaults.baseURL + path, data)
+async function dreq(path, payload) {
+    return await axios.delete(axios.defaults.baseURL + path, {data: payload})
     .then(response => response.data)
     .catch(error => console.log(error));
 }
