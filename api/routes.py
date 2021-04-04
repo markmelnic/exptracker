@@ -9,17 +9,19 @@ from api.utils import *
 def main():
     return jsonify({"status": "Whatever"})
 
-@app.route("/people")
-def people():
-    return jsonify(get_people())
-
-@app.route("/add_user", methods=['POST'])
+@app.route("/people", methods=['GET', 'POST', 'DELETE'])
 def add_user():
-    person = request.get_json()
-    entry = People(
-        name = person['name'],
-        share = person['share']
-    )
-    db.session.add(entry)
-    db.session.commit()
+    method = request.method
+    if method == "POST": 
+        person = request.get_json()
+        entry = People(
+            name = person['name'],
+            share = person['share']
+        )
+        db.session.add(entry)
+        db.session.commit()
+    elif method == "DELETE":
+        People.query.filter_by(id=request.get_json()["id"]).delete()
+        db.session.commit()
+
     return jsonify(get_people())

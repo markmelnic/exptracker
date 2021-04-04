@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { greq, preq } from '@/areq.js';
+import { greq, preq, dreq } from '@/areq.js';
 
 export default {
     name: "People",
@@ -30,8 +30,12 @@ export default {
     },
     methods: {
         async addUser() {
-            this.people = await preq('add_user', {name: this.name, share: this.share})
+            this.people = await preq('people', {name: this.name, share: this.share})
+        },
+        async delUser() {
+            this.people = await dreq('people', {id: this.id})
         }
+
     },
     created: async function() {
         this.people = await greq('people')

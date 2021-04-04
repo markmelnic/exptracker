@@ -13,4 +13,10 @@ async function preq(path, data) {
     .catch(error => console.log(error));
 }
 
-export { greq, preq }
+async function dreq(path, data) {
+    return await axios.delete(axios.defaults.baseURL + path, data)
+    .then(response => response.data)
+    .catch(error => console.log(error));
+}
+
+export { greq, preq, dreq }
