@@ -13,4 +13,4 @@ async function preq(path, data) {
     .catch(error => console.log(error));
 }
 
-export default { greq, preq }
+export { greq, preq }
